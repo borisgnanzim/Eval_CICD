@@ -17,11 +17,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupération du code
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Déploiement vers GitHub Pages
+      - name: Build site
+        run: |
+          mkdir dist
+          cp -r * dist/
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./dist
